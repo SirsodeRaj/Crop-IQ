@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #f8fafc;
+    --foreground: #0f172a;
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+    --primary: #10b981; /* Emerald 500 */
+    --primary-foreground: #ffffff;
+    --border: #e2e8f0;
+  }
+
+  .dark {
+    --background: #020617; /* Slate 950 */
+    --foreground: #f8fafc;
+    --card: #0f172a; /* Slate 900 */
+    --card-foreground: #f8fafc;
+    --primary: #10b981;
+    --primary-foreground: #ffffff;
+    --border: #1e293b;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 dark:bg-black/20 dark:border-white/10;
+  }
+}

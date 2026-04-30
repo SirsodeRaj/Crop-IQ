@@ -1,0 +1,34 @@
+# Environments
+.env
+.env.local
+.venv
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Backend (Python)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.db
+*.sqlite3
+backend/crop_iq.db
+
+# Frontend (Node.js)
+node_modules/
+.pnp
+.pnp.js
+.next/
+out/
+build/
+
+# Next.js logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
