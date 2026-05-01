@@ -22,41 +22,41 @@ export function AnalysisForm({ onSubmit, isLoading }: { onSubmit: (data: any) =>
     <motion.form 
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="glass p-6 rounded-2xl shadow-xl flex flex-col gap-4 border border-border/50"
+      className="glass p-6 rounded-[2rem] flex flex-col gap-5"
       onSubmit={handleSubmit}
     >
-      <h2 className="text-xl font-semibold mb-2">New Crop Analysis</h2>
+      <h2 className="text-xl font-semibold mb-2 text-slate-800">New Crop Analysis</h2>
       
       <div className="grid grid-cols-2 gap-4">
-        <div className="flex flex-col gap-1">
-          <label className="text-sm text-slate-400">Latitude</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-slate-600">Latitude</label>
           <input 
             type="number" step="0.01" value={lat} onChange={(e) => setLat(e.target.value)}
-            className="bg-black/20 border border-border/50 rounded-md p-2 text-sm focus:outline-none focus:border-primary/50 transition-colors"
+            className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all text-slate-800"
           />
         </div>
-        <div className="flex flex-col gap-1">
-          <label className="text-sm text-slate-400">Longitude</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-sm font-medium text-slate-600">Longitude</label>
           <input 
             type="number" step="0.01" value={lon} onChange={(e) => setLon(e.target.value)}
-            className="bg-black/20 border border-border/50 rounded-md p-2 text-sm focus:outline-none focus:border-primary/50 transition-colors"
+            className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all text-slate-800"
           />
         </div>
       </div>
 
-      <div className="flex flex-col gap-1">
-        <label className="text-sm text-slate-400">Budget (USD)</label>
+      <div className="flex flex-col gap-1.5">
+        <label className="text-sm font-medium text-slate-600">Budget (USD)</label>
         <input 
           type="number" value={budget} onChange={(e) => setBudget(e.target.value)}
-          className="bg-black/20 border border-border/50 rounded-md p-2 text-sm focus:outline-none focus:border-primary/50 transition-colors"
+          className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all text-slate-800"
         />
       </div>
 
-      <div className="flex flex-col gap-1">
-        <label className="text-sm text-slate-400">Risk Tolerance</label>
+      <div className="flex flex-col gap-1.5">
+        <label className="text-sm font-medium text-slate-600">Risk Tolerance</label>
         <select 
           value={risk} onChange={(e) => setRisk(e.target.value)}
-          className="bg-black/20 border border-border/50 rounded-md p-2 text-sm focus:outline-none focus:border-primary/50 transition-colors appearance-none"
+          className="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all appearance-none text-slate-800"
         >
           <option value="LOW">Low</option>
           <option value="MEDIUM">Medium</option>
@@ -67,7 +67,7 @@ export function AnalysisForm({ onSubmit, isLoading }: { onSubmit: (data: any) =>
       <button 
         type="submit" 
         disabled={isLoading}
-        className="mt-4 bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-2 px-4 rounded-md transition-colors disabled:opacity-50"
+        className="mt-4 bg-[#10b981] hover:bg-[#059669] text-white shadow-md font-medium py-3 px-4 rounded-xl transition-colors disabled:opacity-50"
       >
         {isLoading ? "Analyzing..." : "Generate Insights"}
       </button>

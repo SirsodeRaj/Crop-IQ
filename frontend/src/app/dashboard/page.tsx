@@ -46,19 +46,19 @@ export default function Dashboard() {
       {/* Right Content Area */}
       <div className="w-full flex-1 flex flex-col gap-8">
         {!recommendations && !isLoading && (
-          <div className="glass p-12 rounded-2xl border border-border/50 text-center flex flex-col items-center justify-center min-h-[400px]">
-            <div className="w-16 h-16 rounded-full bg-primary/20 text-primary flex items-center justify-center mb-4">
+          <div className="glass p-12 rounded-[2rem] text-center flex flex-col items-center justify-center min-h-[400px]">
+            <div className="w-16 h-16 rounded-full bg-[#dcfce7] text-[#16a34a] flex items-center justify-center mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Awaiting Data</h3>
-            <p className="text-slate-400 max-w-sm">Enter your location and budget parameters on the left to generate AI-driven crop recommendations.</p>
+            <h3 className="text-xl font-semibold mb-2 text-slate-800">Awaiting Data</h3>
+            <p className="text-slate-500 max-w-sm">Enter your location and budget parameters on the left to generate AI-driven crop recommendations.</p>
           </div>
         )}
 
         {isLoading && (
-          <div className="glass p-12 rounded-2xl border border-border/50 flex flex-col items-center justify-center min-h-[400px] gap-4">
-            <div className="w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
-            <p className="text-slate-400 animate-pulse">Running geospatial analysis...</p>
+          <div className="glass p-12 rounded-[2rem] flex flex-col items-center justify-center min-h-[400px] gap-4">
+            <div className="w-8 h-8 border-4 border-[#10b981]/30 border-t-[#10b981] rounded-full animate-spin"></div>
+            <p className="text-slate-500 animate-pulse font-medium">Running geospatial analysis...</p>
           </div>
         )}
 
@@ -68,8 +68,8 @@ export default function Dashboard() {
             className="flex flex-col gap-8"
           >
             <div className="flex items-center justify-between">
-              <h2 className="text-3xl font-bold tracking-tight">Analysis Results</h2>
-              <span className="text-sm px-3 py-1 bg-primary/20 text-primary rounded-full border border-primary/30">
+              <h2 className="text-3xl font-bold tracking-tight text-slate-800">Analysis Results</h2>
+              <span className="text-sm px-3 py-1 bg-[#dcfce7] text-[#16a34a] rounded-full font-bold">
                 {recommendations.length} Crops Analyzed
               </span>
             </div>

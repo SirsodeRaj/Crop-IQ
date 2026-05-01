@@ -16,13 +16,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={cn(inter.className, "min-h-screen bg-background antialiased selection:bg-primary/30")}>
+    <html lang="en">
+      <body className={cn(inter.className, "min-h-screen bg-[#f8fafc] text-slate-800 antialiased selection:bg-primary/30")}>
         <div className="relative flex min-h-screen flex-col">
           {/* Subtle background gradient */}
-          <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(255,255,255,0))]" />
+          <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.08),rgba(255,255,255,0))]" />
           
-          <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
             <div className="container mx-auto flex h-16 items-center px-4">
               <div className="flex gap-2 items-center font-bold text-xl tracking-tight">
                 <span className="text-primary">Crop</span>Intelligence

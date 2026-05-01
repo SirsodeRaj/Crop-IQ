@@ -35,19 +35,19 @@ export default function Home() {
           <span className="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
           AI-Powered Agriculture
         </div>
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">
+        <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600">
           Optimize Your Yield with Data Intelligence
         </h1>
-        <p className="text-xl text-slate-400">
+        <p className="text-xl text-slate-600">
           Make data-driven decisions on crop selection, planting schedules, and risk management using our advanced advisory engine.
         </p>
         
         <div className="flex justify-center gap-4 pt-4">
-          <Link href="/dashboard" className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+          <Link href="/dashboard" className="inline-flex h-11 items-center justify-center rounded-md bg-[#10b981] px-8 text-sm font-medium text-white transition-colors hover:bg-[#059669]">
             Get Started
             <ChevronRight className="ml-2 h-4 w-4" />
           </Link>
-          <button className="inline-flex h-11 items-center justify-center rounded-md border border-border bg-transparent px-8 text-sm font-medium transition-colors hover:bg-slate-800">
+          <button className="inline-flex h-11 items-center justify-center rounded-md border border-slate-300 bg-white px-8 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50">
             View Demo
           </button>
         </div>
@@ -60,11 +60,11 @@ export default function Home() {
         className="grid md:grid-cols-3 gap-6 w-full max-w-5xl"
       >
         {features.map((feature, i) => (
-          <div key={i} className="glass rounded-xl p-6 relative overflow-hidden group hover:border-primary/50 transition-colors">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <feature.icon className="h-10 w-10 text-primary mb-4" />
-            <h3 className="text-lg font-semibold mb-2">{feature.name}</h3>
-            <p className="text-sm text-slate-400">{feature.description}</p>
+          <div key={i} className="glass rounded-2xl p-6 relative overflow-hidden group hover:border-[#10b981]/50 transition-colors">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#10b981]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <feature.icon className="h-10 w-10 text-[#10b981] mb-4" />
+            <h3 className="text-lg font-semibold mb-2 text-slate-800">{feature.name}</h3>
+            <p className="text-sm text-slate-600">{feature.description}</p>
           </div>
         ))}
       </motion.div>
