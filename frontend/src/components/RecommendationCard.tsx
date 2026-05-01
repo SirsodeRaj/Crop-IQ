@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { TrendingUp, ShieldAlert, CheckCircle2 } from "lucide-react";
+import { TrendingUp, TrendingDown, Leaf, CloudRain, Sprout, Droplet } from "lucide-react";
 
 interface RecommendationProps {
   crop: string;
@@ -9,56 +9,129 @@ interface RecommendationProps {
   confidence: string;
   market_trend: string;
   estimated_roi_percentage: number;
+  climate_match?: number;
+  water_feasibility?: number;
+  soil_match?: number;
   rationale: string;
   index: number;
 }
 
+const cropImages: Record<string, string> = {
+  "Wheat": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=600&auto=format&fit=crop",
+  "Rice": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=600&auto=format&fit=crop",
+  "Maize": "https://images.unsplash.com/photo-1551754655-cd27e38d2076?q=80&w=600&auto=format&fit=crop",
+  "Soybeans": "https://images.unsplash.com/photo-1596395819057-cb3738f4e2f9?q=80&w=600&auto=format&fit=crop",
+  "Cotton": "https://images.unsplash.com/photo-1585607344893-43a479234c9c?q=80&w=600&auto=format&fit=crop",
+  "Jute": "https://images.unsplash.com/photo-1627306236940-5e8e3a246b14?q=80&w=600&auto=format&fit=crop",
+  "Banana": "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4?q=80&w=600&auto=format&fit=crop",
+  "Mango": "https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=600&auto=format&fit=crop",
+  "Coffee": "https://images.unsplash.com/photo-1559525839-b184a4d698c7?q=80&w=600&auto=format&fit=crop"
+};
+
+const defaultImage = "https://images.unsplash.com/photo-1530836369250-ef71a3a5e4b8?q=80&w=600&auto=format&fit=crop";
+
+const ProgressBar = ({ label, icon: Icon, value, color }: any) => (
+  <div className="flex flex-col gap-1.5">
+    <div className="flex justify-between items-center text-sm text-slate-500">
+      <div className="flex items-center gap-1.5">
+        <Icon className="w-4 h-4 text-slate-400" />
+        <span>{label}</span>
+      </div>
+      <span className="font-semibold text-slate-800">{value}%</span>
+    </div>
+    <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+      <motion.div 
+        initial={{ width: 0 }} 
+        animate={{ width: `${value}%` }} 
+        transition={{ duration: 1, delay: 0.2 }}
+        className={`h-full rounded-full ${color}`} 
+      />
+    </div>
+  </div>
+);
+
 export function RecommendationCard({ rec }: { rec: RecommendationProps }) {
-  const getScoreColor = (score: number) => {
-    if (score >= 80) return "text-emerald-400";
-    if (score >= 50) return "text-amber-400";
-    return "text-rose-400";
-  };
+  const imageUrl = cropImages[rec.crop] || defaultImage;
+  const isUpwardTrend = rec.market_trend.toLowerCase() !== "decreasing" && rec.market_trend.toLowerCase() !== "down";
+  const profitability = rec.estimated_roi_percentage > 20 ? "High" : rec.estimated_roi_percentage > 10 ? "Medium" : "Low";
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: rec.index * 0.1, duration: 0.5 }}
-      className="glass p-5 rounded-xl border border-border/50 hover:border-primary/50 transition-colors group relative overflow-hidden"
+      className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.06)] overflow-hidden flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-shadow"
     >
-      <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-        <TrendingUp className="w-24 h-24" />
+      {/* Top Image Section */}
+      <div className="relative h-56 w-full shrink-0">
+        <img src={imageUrl} alt={rec.crop} className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+        
+        {rec.index === 0 && (
+          <div className="absolute top-4 right-4 bg-[#00c897] text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-md">
+            Top Match
+          </div>
+        )}
+        
+        <h3 className="absolute bottom-5 left-5 text-4xl font-extrabold text-white tracking-tight drop-shadow-md">
+          {rec.crop}
+        </h3>
       </div>
-      
-      <div className="flex justify-between items-start mb-4 relative z-10">
-        <div>
-          <h3 className="text-2xl font-bold tracking-tight">{rec.crop}</h3>
-          <div className="flex items-center gap-2 mt-1 text-sm text-slate-400">
-            {rec.confidence === "High" ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <ShieldAlert className="w-4 h-4 text-amber-400" />}
-            {rec.confidence} Confidence
+
+      {/* Body Section */}
+      <div className="p-6 flex flex-col gap-6 bg-white text-slate-800 flex-1">
+        
+        {/* Recommendation Badge */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-[#dcfce7] flex items-center justify-center text-[#16a34a]">
+              <Leaf className="w-5 h-5" />
+            </div>
+            <span className="text-[15px] font-medium text-slate-600">Recommendation</span>
+          </div>
+          <div className="bg-[#dcfce7] text-[#16a34a] px-3 py-1.5 rounded-2xl flex flex-col items-center leading-tight">
+            <span className="font-bold text-base">{rec.suitability_score}%</span>
+            <span className="text-[10px] uppercase font-extrabold tracking-wider opacity-80">Match</span>
           </div>
         </div>
-        <div className={`text-3xl font-extrabold ${getScoreColor(rec.suitability_score)}`}>
-          {rec.suitability_score}
-          <span className="text-sm font-normal text-slate-500 ml-1">/100</span>
-        </div>
-      </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-4 relative z-10">
-        <div className="bg-black/20 rounded-lg p-3 border border-white/5">
-          <div className="text-xs text-slate-400 mb-1">Estimated ROI</div>
-          <div className="text-lg font-semibold text-emerald-400">+{rec.estimated_roi_percentage}%</div>
+        {/* Progress Bars */}
+        <div className="flex flex-col gap-4 mt-2">
+          <ProgressBar 
+            label="Climate Match" 
+            icon={CloudRain} 
+            value={rec.climate_match ?? rec.suitability_score} 
+            color="bg-blue-500" 
+          />
+          <ProgressBar 
+            label="Soil Match" 
+            icon={Sprout} 
+            value={rec.soil_match ?? rec.suitability_score} 
+            color="bg-orange-500" 
+          />
+          <ProgressBar 
+            label="Water Feasibility" 
+            icon={Droplet} 
+            value={rec.water_feasibility ?? rec.suitability_score} 
+            color="bg-[#00c897]" 
+          />
         </div>
-        <div className="bg-black/20 rounded-lg p-3 border border-white/5">
-          <div className="text-xs text-slate-400 mb-1">Market Trend</div>
-          <div className="text-lg font-semibold capitalize">{rec.market_trend}</div>
-        </div>
-      </div>
 
-      <div className="text-sm text-slate-300 relative z-10 border-t border-border/40 pt-3">
-        <span className="font-semibold text-white mr-2">Rationale:</span>
-        {rec.rationale}
+        {/* Footer */}
+        <div className="flex items-center justify-between pt-5 mt-auto border-t border-slate-100">
+          <div>
+            <div className="text-[11px] uppercase text-slate-400 font-bold tracking-wider mb-1">Profitability</div>
+            <div className="font-semibold text-slate-800">{profitability}</div>
+          </div>
+          <div className="text-right">
+            <div className="text-[11px] uppercase text-slate-400 font-bold tracking-wider mb-1">Trend</div>
+            <div className={`font-semibold flex items-center gap-1 ${isUpwardTrend ? "text-[#16a34a]" : "text-rose-500"}`}>
+              {isUpwardTrend ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
+              <span className="capitalize">{rec.market_trend}</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </motion.div>
   );

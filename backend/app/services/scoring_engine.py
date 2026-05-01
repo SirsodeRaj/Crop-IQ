@@ -20,32 +20,39 @@ class ScoringEngine:
             score = 100
             rationale = []
 
-            # 1. Temperature Check (30% weight)
+            # 1. Temperature Check (30% weight) -> Climate Match
             t_min = crop.optimal_temp_range.get("min", 0)
             t_max = crop.optimal_temp_range.get("max", 50)
+            temp_penalty = 0
             if not (t_min <= temp <= t_max):
-                penalty = min(30, abs(temp - t_min) if temp < t_min else abs(temp - t_max) * 2)
-                score -= penalty
+                temp_penalty = min(30, abs(temp - t_min) if temp < t_min else abs(temp - t_max) * 2)
+                score -= temp_penalty
                 rationale.append(f"Temperature ({temp}°C) is outside optimal range ({t_min}-{t_max}°C).")
             else:
                 rationale.append("Temperature is optimal.")
+            climate_match = int(((30 - temp_penalty) / 30) * 100)
 
-            # 2. Rainfall Check (40% weight)
+            # 2. Rainfall Check (40% weight) -> Water Feasibility
             r_min = crop.optimal_rainfall_range.get("min", 0)
             r_max = crop.optimal_rainfall_range.get("max", 5000)
+            rain_penalty = 0
             if not (r_min <= rainfall <= r_max):
-                penalty = min(40, (abs(rainfall - r_min) / 100) * 5 if rainfall < r_min else (abs(rainfall - r_max) / 100) * 5)
-                score -= penalty
+                rain_penalty = min(40, (abs(rainfall - r_min) / 100) * 5 if rainfall < r_min else (abs(rainfall - r_max) / 100) * 5)
+                score -= rain_penalty
                 rationale.append(f"Rainfall ({rainfall}mm) is sub-optimal (Ideal: {r_min}-{r_max}mm).")
             else:
                 rationale.append("Rainfall is optimal.")
+            water_feasibility = int(((40 - rain_penalty) / 40) * 100)
 
-            # 3. Soil Check (30% weight)
+            # 3. Soil Check (30% weight) -> Soil Match
+            soil_penalty = 0
             if soil_type not in crop.soil_types_supported:
+                soil_penalty = 30
                 score -= 30
                 rationale.append(f"Soil type '{soil_type}' is not highly recommended for this crop.")
             else:
                 rationale.append("Soil type is suitable.")
+            soil_match = int(((30 - soil_penalty) / 30) * 100)
 
             # Ensure score doesn't drop below 0
             score = max(0, int(score))
@@ -61,6 +68,9 @@ class ScoringEngine:
                 "confidence": confidence,
                 "market_trend": market_data.get("price_trend"),
                 "estimated_roi_percentage": crop.expected_roi,
+                "climate_match": climate_match,
+                "water_feasibility": water_feasibility,
+                "soil_match": soil_match,
                 "rationale": " ".join(rationale)
             })
 
