@@ -13,7 +13,7 @@
 
 ## 🚀 Live Demo
 
-🌐 **[https://crop-iq-liard.vercel.app](https://crop-iq-liard.vercel.app)**
+🌐 **https://crop-iq-bravo.vercel.app/**
 
 ---
 
