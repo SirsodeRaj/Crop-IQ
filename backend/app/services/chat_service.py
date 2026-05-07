@@ -7,7 +7,7 @@ from app.core.config import settings
 
 class ChatService:
     @staticmethod
-    def generate_advisory_reply(analysis_data: dict, question: str) -> str:
+    def generate_advisory_reply(analysis_data: dict, question: str, history: list = None) -> str:
         api_key = settings.OPENAI_API_KEY
         
         # Mock response if using a dummy key
@@ -23,13 +23,19 @@ class ChatService:
             Market Context: {analysis_data.get('market_data')}
             Your task is to answer their 'what-if' scenarios and provide actionable, data-driven agricultural advice."""
             
+            messages = [{"role": "system", "content": system_prompt}]
+            
+            if history:
+                for msg in history:
+                    if msg.get("role") in ["user", "assistant"]:
+                        messages.append({"role": msg["role"], "content": msg["content"]})
+                        
+            messages.append({"role": "user", "content": question})
+            
             response = client.chat.completions.create(
                 model="gpt-4o-mini",
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": question}
-                ],
-                max_tokens=250,
+                messages=messages,
+                max_tokens=500,
                 temperature=0.7
             )
             

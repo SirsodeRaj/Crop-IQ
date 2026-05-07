@@ -20,7 +20,7 @@ export async function fetchRecommendations(data: {
   return response.json();
 }
 
-export async function askAdvisory(data: { analysis_id: string; question: string }) {
+export async function askAdvisory(data: { analysis_id: string; question: string; history?: {role: string, content: string}[] }) {
   const response = await fetch(`${API_BASE_URL}/advisory/ask`, {
     method: "POST",
     headers: {

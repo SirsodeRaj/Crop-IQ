@@ -22,6 +22,8 @@ def ask_advisor(request: AdvisoryRequest, db: Session = Depends(get_db)):
     }
 
     # 3. Trigger OpenAI service
-    reply = ChatService.generate_advisory_reply(analysis_data, request.question)
+    # Convert ChatMessage objects to dicts for the service
+    history_dicts = [{"role": msg.role, "content": msg.content} for msg in request.history] if request.history else []
+    reply = ChatService.generate_advisory_reply(analysis_data, request.question, history_dicts)
 
     return AdvisoryResponse(reply=reply)

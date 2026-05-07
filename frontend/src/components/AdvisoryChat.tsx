@@ -27,9 +27,16 @@ export function AdvisoryChat({ analysisId }: { analysisId: string }) {
     setIsLoading(true);
 
     try {
+      // Exclude the initial greeting from history and format for backend
+      const currentHistory = messages.filter(m => !(m.role === "advisor" && m.content.startsWith("Hi! I'm your AI"))).map(m => ({
+        role: m.role === "advisor" ? "assistant" : "user",
+        content: m.content
+      }));
+
       const response = await askAdvisory({
         analysis_id: analysisId,
-        question: userMessage
+        question: userMessage,
+        history: currentHistory
       });
       setMessages(prev => [...prev, { role: "advisor", content: response.reply }]);
     } catch (error) {
