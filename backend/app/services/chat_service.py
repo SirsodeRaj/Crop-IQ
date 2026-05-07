@@ -12,7 +12,7 @@ class ChatService:
         
         # Mock response if using a dummy key
         if not api_key or api_key.startswith("sk-mock"):
-            return f"[Mock AI Advisory] Based on your analysis where {analysis_data.get('environmental_data', {}).get('temperature_celsius')}°C was detected: To answer '{question}', consider shifting your planting schedule or introducing heat-tolerant crop varieties."
+            return f"Based on the analysis where {analysis_data.get('environmental_data', {}).get('temperature_celsius')}°C was detected: To answer '{question}', consider shifting your planting schedule or introducing heat-tolerant crop varieties."
 
         try:
             client = OpenAI(api_key=api_key)
