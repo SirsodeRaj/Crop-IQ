@@ -25,9 +25,9 @@ export default function RootLayout({
           <div className="relative flex min-h-screen flex-col">
             {/* Subtle background gradient */}
             <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.08),rgba(255,255,255,0))]" />
-            
+
             <Navbar />
-            
+
             <main className="flex-1 container mx-auto px-4 py-8">
               {children}
             </main>
@@ -35,9 +35,9 @@ export default function RootLayout({
             <footer className="w-full border-t border-slate-200 py-8 mt-12 bg-white/50 backdrop-blur-sm">
               <div className="container mx-auto px-4 flex flex-col items-center justify-center gap-2">
                 <p className="text-sm text-slate-500">Developed by</p>
-                <a 
-                  href="https://github.com/SirsodeRaj/" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/SirsodeRaj/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all hover:scale-105"
                 >
