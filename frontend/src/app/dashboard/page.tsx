@@ -7,8 +7,10 @@ import { RoiChart } from "@/components/charts/RoiChart";
 import { AdvisoryChat } from "@/components/AdvisoryChat";
 import { fetchRecommendations } from "@/lib/api";
 import { motion } from "framer-motion";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Dashboard() {
+  const { getToken } = useAuth();
   const [recommendations, setRecommendations] = useState<any[] | null>(null);
   const [analysisId, setAnalysisId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,9 +20,8 @@ export default function Dashboard() {
     setIsLoading(true);
     setError(null);
     try {
-      // In MVP, we might get an error if DB isn't seeded or project doesn't exist.
-      // But the API call should trigger the backend analysis.
-      const result = await fetchRecommendations(data);
+      const token = await getToken();
+      const result = await fetchRecommendations(data, token);
       setRecommendations(result.recommendations);
       setAnalysisId(result.analysis_id);
     } catch (err: any) {

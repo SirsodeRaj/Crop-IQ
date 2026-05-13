@@ -15,8 +15,12 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    firebase_uid = Column(String, unique=True, index=True, nullable=True) # Nullable for legacy
     email = Column(String, unique=True, index=True, nullable=False)
-    password_hash = Column(String, nullable=False)
+    phone_number = Column(String, unique=True, index=True, nullable=True)
+    full_name = Column(String, nullable=True)
+    avatar_url = Column(String, nullable=True)
+    password_hash = Column(String, nullable=True) # Nullable because Firebase handles passwords
     created_at = Column(DateTime, default=datetime.utcnow)
 
     projects = relationship("Project", back_populates="user")
@@ -41,12 +45,15 @@ class Analysis(Base):
 
     id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     project_id = Column(Uuid(as_uuid=True), ForeignKey("projects.id"))
+    user_id = Column(Uuid(as_uuid=True), ForeignKey("users.id"), nullable=True) # Link to user directly for easy querying
     environmental_data = Column(JSON)
     market_data = Column(JSON)
     recommendations = Column(JSON)
+    chat_history = Column(JSON, default=list) # To store chatbot history
     created_at = Column(DateTime, default=datetime.utcnow)
 
     project = relationship("Project", back_populates="analyses")
+    user = relationship("User")
 
 class CropRequirement(Base):
     __tablename__ = "crop_requirements"

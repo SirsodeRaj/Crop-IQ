@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Bot, User } from "lucide-react";
 import { askAdvisory } from "@/lib/api";
+import { useAuth } from "@/context/AuthContext";
 
 interface Message {
   role: "user" | "advisor";
@@ -11,6 +12,7 @@ interface Message {
 }
 
 export function AdvisoryChat({ analysisId }: { analysisId: string }) {
+  const { getToken } = useAuth();
   const [messages, setMessages] = useState<Message[]>([
     { role: "advisor", content: "Hi! I'm your AI Agricultural Advisor. What 'what-if' scenarios or questions do you have about this analysis?" }
   ]);
@@ -33,11 +35,12 @@ export function AdvisoryChat({ analysisId }: { analysisId: string }) {
         content: m.content
       }));
 
+      const token = await getToken();
       const response = await askAdvisory({
         analysis_id: analysisId,
         question: userMessage,
         history: currentHistory
-      });
+      }, token);
       setMessages(prev => [...prev, { role: "advisor", content: response.reply }]);
     } catch (error) {
       setMessages(prev => [...prev, { role: "advisor", content: "Sorry, I encountered an error while analyzing your question." }]);

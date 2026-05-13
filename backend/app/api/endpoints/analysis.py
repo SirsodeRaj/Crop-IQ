@@ -1,17 +1,18 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app.db.database import get_db
-from app.db.models import Project, Analysis, CropRequirement
+from app.db.models import Project, Analysis, CropRequirement, User
 from app.schemas.analysis import AnalysisRequest, AnalysisResponse
 from app.services.weather_service import WeatherService, SoilService
 from app.services.market_service import MarketService
 from app.services.scoring_engine import ScoringEngine
+from app.core.auth_firebase import get_current_user_optional
 import uuid
 
 router = APIRouter()
 
 @router.post("/recommend", response_model=AnalysisResponse)
-def run_analysis(request: AnalysisRequest, db: Session = Depends(get_db)):
+def run_analysis(request: AnalysisRequest, db: Session = Depends(get_db), current_user: User | None = Depends(get_current_user_optional)):
     # 1. Validate project
     project = db.query(Project).filter(Project.id == request.project_id).first()
     if not project:
@@ -39,9 +40,11 @@ def run_analysis(request: AnalysisRequest, db: Session = Depends(get_db)):
     # 6. Save Analysis
     analysis = Analysis(
         project_id=project.id,
+        user_id=current_user.id if current_user else None,
         environmental_data=env_data,
         market_data=market_data,
-        recommendations=recommendations
+        recommendations=recommendations,
+        chat_history=[]
     )
     db.add(analysis)
     db.commit()

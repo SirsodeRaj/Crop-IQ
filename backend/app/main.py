@@ -17,11 +17,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from app.api.endpoints import auth, analysis, advisory
+from app.api.endpoints import auth, analysis, advisory, profile
 
 app.include_router(auth.router, prefix=f"{settings.API_V1_STR}/auth", tags=["auth"])
 app.include_router(analysis.router, prefix=f"{settings.API_V1_STR}/analysis", tags=["analysis"])
 app.include_router(advisory.router, prefix=f"{settings.API_V1_STR}/advisory", tags=["advisory"])
+app.include_router(profile.router, prefix=f"{settings.API_V1_STR}/profile", tags=["profile"])
 
 @app.get("/")
 def root():

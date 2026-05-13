@@ -42,14 +42,11 @@ export default function Home() {
           Make data-driven decisions on crop selection, planting schedules, and risk management using our advanced advisory engine.
         </p>
         
-        <div className="flex justify-center gap-4 pt-4">
-          <Link href="/dashboard" className="inline-flex h-11 items-center justify-center rounded-md bg-[#10b981] px-8 text-sm font-medium text-white transition-colors hover:bg-[#059669]">
+        <div className="flex justify-center gap-4 pt-8">
+          <Link href="/#dashboard" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#10b981] px-8 text-sm font-medium text-white transition-all hover:bg-[#059669] hover:scale-105 shadow-lg shadow-emerald-500/20">
             Get Started
             <ChevronRight className="ml-2 h-4 w-4" />
           </Link>
-          <button className="inline-flex h-11 items-center justify-center rounded-md border border-slate-300 bg-white px-8 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50">
-            View Demo
-          </button>
         </div>
       </motion.div>
 

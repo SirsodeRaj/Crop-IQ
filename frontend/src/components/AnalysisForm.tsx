@@ -8,11 +8,10 @@ export function AnalysisForm({ onSubmit, isLoading }: { onSubmit: (data: any) =>
   const [lon, setLon] = useState("-118.24");
   const [budget, setBudget] = useState("50000");
   const [risk, setRisk] = useState("MEDIUM");
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit({
-      project_id: "00000000-0000-0000-0000-000000000000", // Dummy ID for MVP
+      project_id: "00000000-0000-0000-0000-000000000000",
       location_data: { lat: parseFloat(lat), lon: parseFloat(lon) },
       constraints: { budget: parseFloat(budget), risk_tolerance: risk },
     });
