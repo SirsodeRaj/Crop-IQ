@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -30,7 +32,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center p-4">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md glass rounded-3xl p-8 shadow-xl"
@@ -38,7 +40,7 @@ export default function ForgotPassword() {
         <Link href="/login" className="inline-flex items-center text-sm text-slate-500 hover:text-slate-800 mb-6 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-1" /> Back to login
         </Link>
-        
+
         <div className="flex flex-col items-center mb-8">
           <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
             <Leaf className="w-6 h-6 text-primary" />
@@ -52,7 +54,7 @@ export default function ForgotPassword() {
             {error}
           </div>
         )}
-        
+
         {message && (
           <div className="bg-green-50 text-green-600 p-3 rounded-xl text-sm mb-6 border border-green-100">
             {message}
@@ -64,8 +66,8 @@ export default function ForgotPassword() {
             <label className="block text-sm font-medium text-slate-700 mb-1.5">Email Address</label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-              <input 
-                type="email" 
+              <input
+                type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -74,9 +76,9 @@ export default function ForgotPassword() {
               />
             </div>
           </div>
-          
-          <button 
-            type="submit" 
+
+          <button
+            type="submit"
             disabled={loading}
             className="w-full py-2.5 bg-primary hover:bg-primary/90 text-white rounded-xl font-medium transition-colors flex items-center justify-center gap-2 mt-2 disabled:opacity-70"
           >

@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { motion } from "framer-motion";
 import { Sprout, CloudRain, TrendingUp, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -25,7 +27,7 @@ const features = [
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] gap-12">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -41,7 +43,7 @@ export default function Home() {
         <p className="text-xl text-slate-600">
           Make data-driven decisions on crop selection, planting schedules, and risk management using our advanced advisory engine.
         </p>
-        
+
         <div className="flex justify-center gap-4 pt-8">
           <Link href="/#dashboard" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#10b981] px-8 text-sm font-medium text-white transition-all hover:bg-[#059669] hover:scale-105 shadow-lg shadow-emerald-500/20">
             Get Started
@@ -50,7 +52,7 @@ export default function Home() {
         </div>
       </motion.div>
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}

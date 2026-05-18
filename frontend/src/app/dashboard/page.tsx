@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 "use client";
 
 import { useState } from "react";
@@ -36,7 +38,7 @@ export default function Dashboard() {
       {/* Left Sidebar Form */}
       <div className="w-full md:w-1/3 shrink-0 sticky top-24">
         <AnalysisForm onSubmit={handleAnalysisSubmit} isLoading={isLoading} />
-        
+
         {error && (
           <div className="mt-4 p-4 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-lg text-sm">
             {error}
@@ -49,7 +51,7 @@ export default function Dashboard() {
         {!recommendations && !isLoading && (
           <div className="glass p-12 rounded-[2rem] text-center flex flex-col items-center justify-center min-h-[400px]">
             <div className="w-16 h-16 rounded-full bg-[#dcfce7] text-[#16a34a] flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>
             </div>
             <h3 className="text-xl font-semibold mb-2 text-slate-800">Awaiting Data</h3>
             <p className="text-slate-500 max-w-sm">Enter your location and budget parameters on the left to generate AI-driven crop recommendations.</p>
@@ -64,7 +66,7 @@ export default function Dashboard() {
         )}
 
         {recommendations && !isLoading && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             className="flex flex-col gap-8"
           >

@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
@@ -10,7 +12,7 @@ import { auth } from "@/lib/firebase";
 export default function Profile() {
   const { user, loading, logout, getToken } = useAuth();
   const router = useRouter();
-  
+
   const [history, setHistory] = useState<any[]>([]);
   const [loadingHistory, setLoadingHistory] = useState(true);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -59,7 +61,7 @@ export default function Profile() {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Profile Header */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="glass p-8 rounded-3xl flex flex-col md:flex-row items-center md:items-start gap-8"
@@ -67,22 +69,22 @@ export default function Profile() {
         <div className="w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center text-primary text-4xl font-bold shrink-0">
           {user.displayName ? user.displayName.charAt(0).toUpperCase() : <User className="w-12 h-12" />}
         </div>
-        
+
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-3xl font-bold text-slate-800">{user.displayName || "Farmer Profile"}</h1>
           <p className="text-slate-500 mt-1 flex items-center justify-center md:justify-start gap-2">
             {user.email || user.phoneNumber}
           </p>
           <p className="text-sm text-slate-400 flex items-center justify-center md:justify-start gap-1 mt-2">
-            <Calendar className="w-4 h-4" /> 
+            <Calendar className="w-4 h-4" />
             Member since {user.metadata.creationTime ? new Date(user.metadata.creationTime).toLocaleDateString() : "recently"}
           </p>
-          
+
           <div className="flex flex-wrap gap-3 mt-6 justify-center md:justify-start">
             <button className="px-6 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-medium transition-colors text-sm">
               Edit Profile
             </button>
-            <button 
+            <button
               onClick={() => logout()}
               className="px-6 py-2 border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl font-medium transition-colors text-sm flex items-center gap-2"
             >
@@ -93,14 +95,14 @@ export default function Profile() {
       </motion.div>
 
       {/* History Section */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
         className="glass p-8 rounded-3xl"
       >
         <h2 className="text-xl font-bold text-slate-800 mb-6">Saved Recommendations & History</h2>
-        
+
         {loadingHistory ? (
           <div className="py-8 text-center text-slate-500 animate-pulse">Loading history...</div>
         ) : history.length > 0 ? (
@@ -109,7 +111,7 @@ export default function Profile() {
               <div key={i} className="p-4 border border-slate-100 rounded-2xl bg-white/50 hover:bg-white transition-colors cursor-pointer">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="font-semibold text-slate-800">Recommendation {i+1}</h3>
+                    <h3 className="font-semibold text-slate-800">Recommendation {i + 1}</h3>
                     <p className="text-sm text-slate-500">{new Date(item.created_at).toLocaleString()}</p>
                   </div>
                   <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
@@ -131,7 +133,7 @@ export default function Profile() {
       </motion.div>
 
       {/* Danger Zone */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
@@ -143,9 +145,9 @@ export default function Profile() {
         <p className="text-red-600/80 text-sm mb-6 max-w-xl">
           Permanently delete your account and all associated data, including generated insights and chatbot history. This action cannot be undone.
         </p>
-        
+
         {!showDeleteConfirm ? (
-          <button 
+          <button
             onClick={() => setShowDeleteConfirm(true)}
             className="px-6 py-2.5 bg-red-100 hover:bg-red-200 text-red-700 rounded-xl font-medium transition-colors text-sm flex items-center gap-2"
           >
@@ -155,13 +157,13 @@ export default function Profile() {
           <div className="p-4 bg-white border border-red-200 rounded-2xl max-w-md">
             <p className="font-medium text-slate-800 mb-4">Are you absolutely sure?</p>
             <div className="flex gap-3">
-              <button 
+              <button
                 onClick={handleDeleteAccount}
                 className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium transition-colors text-sm"
               >
                 Yes, Delete
               </button>
-              <button 
+              <button
                 onClick={() => setShowDeleteConfirm(false)}
                 className="flex-1 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-medium transition-colors text-sm"
               >
