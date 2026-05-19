@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react";
 
 export function AnalysisForm({ onSubmit, isLoading }: { onSubmit: (data: any) => void; isLoading: boolean }) {
   const [lat, setLat] = useState("34.05");
@@ -66,8 +67,9 @@ export function AnalysisForm({ onSubmit, isLoading }: { onSubmit: (data: any) =>
       <button 
         type="submit" 
         disabled={isLoading}
-        className="mt-4 bg-[#10b981] hover:bg-[#059669] text-white shadow-md font-medium py-3 px-4 rounded-xl transition-colors disabled:opacity-50"
+        className="mt-4 flex items-center justify-center gap-2 bg-[#10b981] hover:bg-[#059669] text-white shadow-md font-medium py-3 px-4 rounded-xl transition-colors disabled:opacity-50"
       >
+        {isLoading && <Loader2 className="w-5 h-5 animate-spin" />}
         {isLoading ? "Analyzing..." : "Generate Insights"}
       </button>
     </motion.form>

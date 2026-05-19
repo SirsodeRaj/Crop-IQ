@@ -43,7 +43,7 @@ export default function Navbar() {
         
         <nav className="flex gap-6 items-center text-sm font-medium">
           <Link 
-            href="/dashboard" 
+            href="/" 
             className="text-slate-600 hover:text-primary transition-colors relative group"
           >
             Dashboard

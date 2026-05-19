@@ -20,7 +20,11 @@ export async function fetchRecommendations(data: {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch recommendations");
+    const errorText = await response.text().catch(() => "Unknown error");
+    if (response.status === 401) {
+      throw new Error("Authentication error: Your session may have expired. Please log in again.");
+    }
+    throw new Error(response.statusText || "Failed to fetch recommendations");
   }
 
   return response.json();
@@ -42,6 +46,9 @@ export async function askAdvisory(data: { analysis_id: string; question: string;
   });
 
   if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error("Authentication error: Your session may have expired. Please log in again.");
+    }
     throw new Error("Failed to get advisory reply");
   }
 

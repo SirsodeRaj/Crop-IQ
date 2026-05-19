@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Dashboard() {
-  const { getToken } = useAuth();
+  const { user, getToken } = useAuth();
   const [recommendations, setRecommendations] = useState<any[] | null>(null);
   const [analysisId, setAnalysisId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,12 +22,24 @@ export default function Dashboard() {
     setIsLoading(true);
     setError(null);
     try {
-      const token = await getToken();
+      let token = null;
+      if (user) {
+        try {
+          token = await getToken();
+        } catch (tokenErr) {
+          console.warn("Could not retrieve auth token. Proceeding as guest.", tokenErr);
+        }
+      }
+      
       const result = await fetchRecommendations(data, token);
       setRecommendations(result.recommendations);
       setAnalysisId(result.analysis_id);
     } catch (err: any) {
-      setError(err.message || "An error occurred during analysis.");
+      if (err.message?.includes("Authentication error")) {
+        setError("Your session has expired or your token is invalid. Please log out and log back in to save your analysis.");
+      } else {
+        setError(err.message || "An error occurred during analysis.");
+      }
     } finally {
       setIsLoading(false);
     }
