@@ -21,10 +21,16 @@ export function getFirebaseErrorMessage(error: any): string {
     case "auth/network-request-failed":
       return "Network error. Please check your internet connection.";
     case "auth/popup-closed-by-user":
-      return "Sign-in popup was closed before completing.";
+    case "auth/cancelled-popup-request":
+      return "Google sign-in was cancelled.";
+    case "auth/popup-blocked":
+      return "Popup blocked by browser. Please allow popups for this site.";
     case "auth/operation-not-allowed":
       return "This sign-in method is currently disabled.";
     default:
+      if (error.code.startsWith("auth/")) {
+         return "Unable to authenticate. Please try again.";
+      }
       return "Authentication failed. Please try again.";
   }
 }

@@ -31,12 +31,25 @@ export default function Dashboard() {
         }
       }
       
-      const result = await fetchRecommendations(data, token);
+      let result = null;
+      try {
+        result = await fetchRecommendations(data, token);
+      } catch (err: any) {
+        // If 401, force refresh the token and retry once
+        if (err.message?.includes("Authentication error") && user) {
+          console.log("Token rejected. Attempting to force refresh...");
+          token = await getToken(true);
+          result = await fetchRecommendations(data, token);
+        } else {
+          throw err;
+        }
+      }
+      
       setRecommendations(result.recommendations);
       setAnalysisId(result.analysis_id);
     } catch (err: any) {
       if (err.message?.includes("Authentication error")) {
-        setError("Your session has expired or your token is invalid. Please log out and log back in to save your analysis.");
+        setError("Your session has expired. Please log out and log back in to save your analysis.");
       } else {
         setError(err.message || "An error occurred during analysis.");
       }

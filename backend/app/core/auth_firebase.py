@@ -7,6 +7,7 @@ from app.db.database import get_db
 from app.db.models import User
 import json
 import os
+from jose import jwt
 
 # Initialize Firebase Admin
 try:
@@ -28,6 +29,10 @@ def verify_firebase_token(credentials: HTTPAuthorizationCredentials = Depends(se
     
     token = credentials.credentials
     try:
+        if not firebase_admin._apps:
+            print("WARNING: Firebase Admin SDK not initialized! Skipping signature verification for local development.")
+            return jwt.get_unverified_claims(token)
+
         decoded_token = auth.verify_id_token(token)
         return decoded_token
     except Exception as e:

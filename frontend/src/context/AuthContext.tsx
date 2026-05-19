@@ -8,7 +8,7 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   logout: () => Promise<void>;
-  getToken: () => Promise<string | null>;
+  getToken: (forceRefresh?: boolean) => Promise<string | null>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -39,9 +39,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const getToken = async () => {
+  const getToken = async (forceRefresh = false) => {
     if (!auth.currentUser) return null;
-    return await auth.currentUser.getIdToken();
+    try {
+      return await auth.currentUser.getIdToken(forceRefresh);
+    } catch (error) {
+      console.error("Token refresh failed. Session expired.", error);
+      await logout();
+      if (typeof window !== "undefined") {
+        window.location.href = "/login?error=session_expired";
+      }
+      return null;
+    }
   };
 
   return (
