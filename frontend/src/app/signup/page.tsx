@@ -13,6 +13,7 @@ import {
   updateProfile
 } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { getFirebaseErrorMessage } from "@/lib/firebaseErrors";
 import { Leaf, Mail, Lock, User as UserIcon, Loader2, Eye, EyeOff } from "lucide-react";
 
 export default function Signup() {
@@ -48,7 +49,7 @@ export default function Signup() {
       });
       router.push("/profile");
     } catch (err: any) {
-      setError(err.message || "Failed to create account.");
+      setError(getFirebaseErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -62,7 +63,7 @@ export default function Signup() {
       await signInWithPopup(auth, provider);
       router.push("/profile");
     } catch (err: any) {
-      setError(err.message || "Google sign-up failed.");
+      setError(getFirebaseErrorMessage(err));
     } finally {
       setLoading(false);
     }

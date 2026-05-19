@@ -12,6 +12,7 @@ import {
   GoogleAuthProvider
 } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { getFirebaseErrorMessage } from "@/lib/firebaseErrors";
 import { Leaf, Mail, Lock, Loader2, Eye, EyeOff } from "lucide-react";
 
 export default function Login() {
@@ -30,7 +31,7 @@ export default function Login() {
       await signInWithEmailAndPassword(auth, email, password);
       router.push("/profile");
     } catch (err: any) {
-      setError(err.message || "Failed to login. Please check your credentials.");
+      setError(getFirebaseErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -44,7 +45,7 @@ export default function Login() {
       await signInWithPopup(auth, provider);
       router.push("/profile");
     } catch (err: any) {
-      setError(err.message || "Google sign-in failed.");
+      setError(getFirebaseErrorMessage(err));
     } finally {
       setLoading(false);
     }

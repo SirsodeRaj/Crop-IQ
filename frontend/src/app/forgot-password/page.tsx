@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { getFirebaseErrorMessage } from "@/lib/firebaseErrors";
 import { Leaf, Mail, Loader2, ArrowLeft } from "lucide-react";
 
 export default function ForgotPassword() {
@@ -24,7 +25,7 @@ export default function ForgotPassword() {
       await sendPasswordResetEmail(auth, email);
       setMessage("Password reset email sent! Check your inbox.");
     } catch (err: any) {
-      setError(err.message || "Failed to send reset email.");
+      setError(getFirebaseErrorMessage(err));
     } finally {
       setLoading(false);
     }
