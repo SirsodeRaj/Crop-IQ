@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { User, LogOut, Trash2, Calendar, ShieldAlert } from "lucide-react";
-import { auth } from "@/lib/firebase";
+import { User, LogOut, Trash2, Calendar, ShieldAlert, Leaf } from "lucide-react";
 
 export default function Profile() {
   const { user, loading, logout, getToken } = useAuth();
