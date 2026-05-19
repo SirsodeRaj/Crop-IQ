@@ -42,7 +42,7 @@ export default function Profile() {
   }, [user, getToken]);
 
   const handleDeleteAccount = async () => {
-    // In a real app, you might want to re-authenticate or verify OTP here
+    // In a real app, you might want to re-authenticate here
     try {
       const token = await getToken();
       // await fetch("/api/v1/profile", { method: "DELETE", headers: { Authorization: `Bearer ${token}` }});
@@ -72,7 +72,7 @@ export default function Profile() {
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-3xl font-bold text-slate-800">{user.displayName || "Farmer Profile"}</h1>
           <p className="text-slate-500 mt-1 flex items-center justify-center md:justify-start gap-2">
-            {user.email || user.phoneNumber}
+            {user.email}
           </p>
           <p className="text-sm text-slate-400 flex items-center justify-center md:justify-start gap-1 mt-2">
             <Calendar className="w-4 h-4" />
