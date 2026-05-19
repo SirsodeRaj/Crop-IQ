@@ -6,6 +6,7 @@ from app.db.models import RiskTolerance
 class LocationData(BaseModel):
     lat: float
     lon: float
+    name: Optional[str] = "Unknown Location"
 
 class AnalysisConstraints(BaseModel):
     budget: float

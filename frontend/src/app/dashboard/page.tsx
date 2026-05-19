@@ -7,6 +7,7 @@ import { AnalysisForm } from "@/components/AnalysisForm";
 import { RecommendationCard } from "@/components/RecommendationCard";
 import { RoiChart } from "@/components/charts/RoiChart";
 import { AdvisoryChat } from "@/components/AdvisoryChat";
+import { HistorySection } from "@/components/HistorySection";
 import { fetchRecommendations } from "@/lib/api";
 import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
@@ -17,6 +18,12 @@ export default function Dashboard() {
   const [analysisId, setAnalysisId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const handleViewAnalysis = (data: any) => {
+    setRecommendations(data.recommendations);
+    setAnalysisId(null); // Assuming we don't have chat for history right now
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleAnalysisSubmit = async (data: any) => {
     setIsLoading(true);
@@ -59,8 +66,9 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8 items-start">
-      {/* Left Sidebar Form */}
+    <div className="flex flex-col gap-12 pb-12">
+      <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row gap-8 items-start">
+        {/* Left Sidebar Form */}
       <div className="w-full md:w-1/3 shrink-0 sticky top-24">
         <AnalysisForm onSubmit={handleAnalysisSubmit} isLoading={isLoading} />
 
@@ -114,6 +122,10 @@ export default function Dashboard() {
           </motion.div>
         )}
       </div>
+      </div>
+      
+      {/* History Section */}
+      <HistorySection onViewAnalysis={handleViewAnalysis} />
     </div>
   );
 }

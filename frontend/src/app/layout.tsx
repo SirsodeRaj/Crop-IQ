@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/context/AuthContext";
+import { I18nProvider } from "@/components/I18nProvider";
 import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,7 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, "min-h-screen bg-[#f8fafc] text-slate-800 antialiased selection:bg-primary/30")}>
-        <AuthProvider>
+        <I18nProvider>
+          <AuthProvider>
           <div className="relative flex min-h-screen flex-col">
             {/* Subtle background gradient */}
             <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.08),rgba(255,255,255,0))]" />
@@ -48,7 +50,8 @@ export default function RootLayout({
               </div>
             </footer>
           </div>
-        </AuthProvider>
+          </AuthProvider>
+        </I18nProvider>
       </body>
     </html>
   );

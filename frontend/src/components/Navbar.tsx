@@ -4,14 +4,18 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, LogOut, Leaf } from "lucide-react";
+import { User, LogOut, Leaf, Globe } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function Navbar() {
   const { user, loading, logout } = useAuth();
+  const { t, i18n } = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const langDropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   // Close dropdown when clicking outside
@@ -19,6 +23,9 @@ export default function Navbar() {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setDropdownOpen(false);
+      }
+      if (langDropdownRef.current && !langDropdownRef.current.contains(event.target as Node)) {
+        setLangDropdownOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -46,9 +53,49 @@ export default function Navbar() {
             href="/" 
             className="text-slate-600 hover:text-primary transition-colors relative group"
           >
-            Dashboard
+            {t("Dashboard")}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
           </Link>
+
+          <div className="relative" ref={langDropdownRef}>
+            <button 
+              onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+              className="flex items-center gap-2 p-2 rounded-full bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-200/50"
+            >
+              <Globe className="w-4 h-4 text-slate-600" />
+              <span className="text-xs font-bold text-slate-600 uppercase">{i18n.language}</span>
+            </button>
+            
+            <AnimatePresence>
+              {langDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 mt-2 w-32 rounded-xl border border-slate-200 bg-white/90 backdrop-blur-xl shadow-xl overflow-hidden py-1"
+                >
+                  {[
+                    { code: "en", label: "English" },
+                    { code: "hi", label: "हिंदी" },
+                    { code: "mr", label: "मराठी" }
+                  ].map(lang => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        i18n.changeLanguage(lang.code);
+                        localStorage.setItem("app_lang", lang.code);
+                        setLangDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-sm transition-colors ${i18n.language === lang.code ? 'bg-primary/10 text-primary font-semibold' : 'text-slate-700 hover:bg-slate-50'}`}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           <div className="relative" ref={dropdownRef}>
             <button 
@@ -105,7 +152,7 @@ export default function Navbar() {
                         className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors text-left"
                       >
                         <LogOut className="w-4 h-4" />
-                        Logout
+                        {t("Logout")}
                       </button>
                     </>
                   ) : (
