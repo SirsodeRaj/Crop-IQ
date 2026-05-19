@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, LogOut, Settings, Leaf } from "lucide-react";
+import { User, LogOut, Leaf } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
@@ -43,7 +43,7 @@ export default function Navbar() {
         
         <nav className="flex gap-6 items-center text-sm font-medium">
           <Link 
-            href="/#dashboard" 
+            href="/dashboard" 
             className="text-slate-600 hover:text-primary transition-colors relative group"
           >
             Dashboard
@@ -53,14 +53,22 @@ export default function Navbar() {
           <div className="relative" ref={dropdownRef}>
             <button 
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20"
+              className="flex items-center gap-2.5 p-1.5 pr-1.5 pl-3.5 rounded-full bg-white/80 backdrop-blur-md border border-slate-200/80 shadow-sm hover:scale-105 hover:bg-primary/5 hover:border-primary/30 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all duration-300 focus:outline-none"
             >
+              <div className="relative w-[18px] h-[12px]">
+                <span className={`absolute left-0 h-[2px] w-full bg-primary rounded-full transition-all duration-300 ${dropdownOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-0'}`} />
+                <span className={`absolute left-0 top-1/2 -translate-y-1/2 h-[2px] w-full bg-primary rounded-full transition-all duration-300 ${dropdownOpen ? 'opacity-0 translate-x-3' : 'opacity-100'}`} />
+                <span className={`absolute left-0 h-[2px] w-full bg-primary rounded-full transition-all duration-300 ${dropdownOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-0'}`} />
+              </div>
+              
               {user ? (
-                <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold">
+                <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm border border-primary/20">
                   {user.displayName ? user.displayName.charAt(0).toUpperCase() : <User className="w-4 h-4" />}
                 </div>
               ) : (
-                <Settings className="w-5 h-5 text-slate-600" />
+                <div className="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center border border-slate-200/50">
+                  <User className="w-4 h-4" />
+                </div>
               )}
             </button>
 

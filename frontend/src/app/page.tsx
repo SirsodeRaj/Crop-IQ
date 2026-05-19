@@ -45,7 +45,7 @@ export default function Home() {
         </p>
 
         <div className="flex justify-center gap-4 pt-8">
-          <Link href="/#dashboard" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#10b981] px-8 text-sm font-medium text-white transition-all hover:bg-[#059669] hover:scale-105 shadow-lg shadow-emerald-500/20">
+          <Link href="/dashboard" className="inline-flex h-12 items-center justify-center rounded-xl bg-[#10b981] px-8 text-sm font-medium text-white transition-all hover:bg-[#059669] hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/20">
             Get Started
             <ChevronRight className="ml-2 h-4 w-4" />
           </Link>
