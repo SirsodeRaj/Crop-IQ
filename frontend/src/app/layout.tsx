@@ -6,7 +6,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { I18nProvider } from "@/components/I18nProvider";
 import Navbar from "@/components/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "Crop Intelligence",
