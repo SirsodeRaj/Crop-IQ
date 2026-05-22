@@ -1,5 +1,3 @@
----
-
 # 🌾 Crop-IQ
 
 ### Smart Crop Decision Intelligence System
@@ -13,7 +11,7 @@
 
 ## 🚀 Live Demo
 
-🌐 **https://crop-iq-bravo.vercel.app/**
+🌐 [CROP-IQ](**https://crop-iq-bravo.vercel.app/**)
 
 ---
 
@@ -37,19 +35,26 @@ It combines **modern web technologies + intelligent logic** to provide:
 
 ## ✨ Key Features
 
-🔹 Smart crop recommendations
-🔹 Soil & climate-based decision making
-🔹 Compatibility scoring system
-🔹 Clean & responsive UI
-🔹 Fast API integration
-🔹 Real-time interaction
+🔹 Smart crop recommendations  
+🔹 Soil & climate-based decision making  
+🔹 Compatibility scoring system  
+🔹 Clean & responsive UI  
+🔹 Fast API integration  
+🔹 Real-time interaction  
 
 ---
 
 ## 🧠 How It Works
 
 ```text
-User Input → Processing → Recommendation Engine → Results
+  User Input
+      ↓
+  Processing
+      ↓
+Recommendation
+    Engine
+      ↓
+   Results
 ```
 
 ### Input Parameters:
@@ -158,7 +163,8 @@ python run.py
 
 ---
 
-## 📸 Screenshots (Add yours here)
+## 📸 Screenshots
+
 
 ```text
 (Add UI screenshots for better impact)
@@ -168,21 +174,21 @@ python run.py
 
 ## 🧪 Future Enhancements
 
-🚀 AI-based crop prediction model
-🌦️ Weather API integration
-📍 Location-based recommendations
-📊 Advanced analytics dashboard
-🌙 Dark mode
-📄 Export reports (PDF)
+🚀 AI-based crop prediction model  
+🌦️ Weather API integration  
+📍 Location-based recommendations  
+📊 Advanced analytics dashboard  
+🌙 Dark mode  
+📄 Export reports (PDF)  
 
 ---
 
 ## 🏆 Use Cases
 
-* Farmers for crop planning
-* Agricultural researchers
-* Smart farming solutions
-* Hackathon/demo projects
+* Farmers for crop planning  
+* Agricultural researchers  
+* Smart farming solutions  
+* Hackathon/demo projects  
 
 ---
 
