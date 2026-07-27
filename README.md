@@ -227,7 +227,7 @@ Fork → Clone → Create Branch → Commit → Push → PR
 
 ## 👨‍💻 Author
 
-**Raj Sirsode**
+**Bhagyashree kathar**
 
 ---
 
