@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 
 # 🌾 Crop-IQ
@@ -20,7 +19,7 @@
 
 ## 📂 Repository
 
-👉 Crop-IQ GitHub repository
+👉 [Crop-IQ GitHub repository](https://github.com/SirsodeRaj/Crop-IQ)
 
 ---
 
@@ -155,7 +154,8 @@ python run.py
 ## 🌐 Deployment
 
 * Hosted on **Vercel**
-* Auto-deploy enabled via GitHub
+* Frontend deployed using **Next.js + Vercel**
+* Connected with the GitHub repository for automatic deployments
 
 ---
 
@@ -199,7 +199,10 @@ Fork → Clone → Create Branch → Commit → Push → PR
 
 ## 👨‍💻 Author
 
+**Ankita Solankar**
+**Bhagyashree Kathar**
 **Raj Sirsode**
+**Vanshika Sawalikar**
 
 ---
 
@@ -208,6 +211,3 @@ Fork → Clone → Create Branch → Commit → Push → PR
 This project is licensed under the **MIT License**
 
 ---
-=======
-# Crop-IQ
->>>>>>> 4c17b16a86af16186028553637c3bd54ad8707fb
