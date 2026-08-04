@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 
 # 🌾 Crop-IQ
@@ -207,3 +208,6 @@ Fork → Clone → Create Branch → Commit → Push → PR
 This project is licensed under the **MIT License**
 
 ---
+=======
+# Crop-IQ
+>>>>>>> 4c17b16a86af16186028553637c3bd54ad8707fb
