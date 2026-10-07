@@ -460,11 +460,4 @@ Crop-IQ can be used for:
 
 ---
 
-# 📜 License
-
-This project is licensed under the **MIT License**.
-
----
-
 ⭐ **If you find Crop-IQ useful, consider giving the repository a star!**
-```
