@@ -450,12 +450,13 @@ Crop-IQ can be used for:
 
 # 👨‍💻 Developed By
 
-### Raj Sirsode
+🔗 **[Ankita Solankar](https://github.com/Ankitasolankar/)**
 
-🔗 **[Ankita Solankar Profile](https://github.com/Ankitasolankar/)**
-🔗 **[Bhagyashree Kathar Profile](https://github.com/bhagyashreekathar-214018/)**
-🔗 **[Raj Sirsode Profile](https://github.com/SirsodeRaj/)**
-🔗 **[Vanshika Sawalikar Profile](https://github.com/vanshikasawalikar-droid)**
+🔗 **[Bhagyashree Kathar](https://github.com/bhagyashreekathar-214018/)**
+
+🔗 **[Raj Sirsode](https://github.com/SirsodeRaj/)**
+
+🔗 **[Vanshika Sawalikar](https://github.com/vanshikasawalikar-droid)**
 
 ---
 
